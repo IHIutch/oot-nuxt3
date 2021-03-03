@@ -1,0 +1,12 @@
+{
+  "development": {
+    "username": "",
+    "password": "",
+    "database": "oot-nuxt",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "production": {
+    "use_env_variable": "DATABASE_URL"
+  }
+}

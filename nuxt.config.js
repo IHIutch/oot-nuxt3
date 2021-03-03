@@ -1,4 +1,12 @@
+import redirectSSL from 'redirect-ssl'
+
 export default {
+  publicRuntimeConfig: {
+    baseURL:
+      process.env.NODE_ENV === 'production'
+        ? 'https://oot-nuxt.herokuapp.com'
+        : 'http://localhost:3000',
+  },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'oot-nuxt3',
@@ -43,4 +51,13 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+
+  // Server Middleware:  https://nuxtjs.org/docs/2.x/configuration-glossary/configuration-servermiddleware
+  serverMiddleware: [
+    redirectSSL.create({
+      enabled: process.env.NODE_ENV === 'production',
+    }),
+    // Will register file from project api directory to handle /api/*
+    { path: '/api', handler: '~/api/index' },
+  ],
 }
